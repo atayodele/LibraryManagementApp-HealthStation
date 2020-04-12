@@ -63,16 +63,23 @@ namespace LibraryMgtApp.Infrastructure.Repository
 
         public async Task<Author> DeleteAuthor(Guid Id)
         {
-            var author = this.FirstOrDefault(p => p.Id == Id);
-            if (author == null)
-                return null;
-            this.UnitOfWork.BeginTransaction();
-            author.IsDeleted = !author.IsDeleted;
-            author.ModifiedOn = DateTime.Now.GetDateUtcNow();
-            await this.UpdateAsync(author);
-            await this.UnitOfWork.CommitAsync();
+            try
+            {
+                var author = this.FirstOrDefault(p => p.Id == Id);
+                if (author == null)
+                    return null;
+                this.UnitOfWork.BeginTransaction();
+                author.IsDeleted = !author.IsDeleted;
+                author.ModifiedOn = DateTime.Now.GetDateUtcNow();
+                await this.UpdateAsync(author);
+                await this.UnitOfWork.CommitAsync();
 
-            return author;
+                return author;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<Author> GetAuthorById(Guid id)
@@ -102,7 +109,7 @@ namespace LibraryMgtApp.Infrastructure.Repository
             results.Clear();
             try
             {
-                var author = this.GetAll(1, 1, a => a.Id, a => a.Id == vm.Id, OrderBy.Descending).FirstOrDefault();
+                var author = this.GetAll(1, 1, a => a.Id, a => a.Id == author_Id, OrderBy.Descending).FirstOrDefault();
                 if (author == null)
                 {
                     results.Add(new ValidationResult("Author couldn't be found to complete update operation."));

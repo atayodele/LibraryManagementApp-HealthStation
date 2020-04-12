@@ -66,7 +66,7 @@ namespace LibraryMgtApp
             services.AddCors();
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("RequireLoggedIn", policy => policy.RequireRole("USERS", "ADMIN").RequireAuthenticatedUser());
+                options.AddPolicy("RequireLoggedIn", policy => policy.RequireRole("USER", "ADMIN").RequireAuthenticatedUser());
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("ADMIN").RequireAuthenticatedUser());
             });
             return services;
@@ -78,7 +78,7 @@ namespace LibraryMgtApp
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Manifest API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Library Management  Assessment API");
                 c.DocExpansion(DocExpansion.None);
             });
 
@@ -89,7 +89,7 @@ namespace LibraryMgtApp
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Manifest API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Library Management  Assessment API", Version = "v1" });
 
 
                 // Swagger 2.+ support

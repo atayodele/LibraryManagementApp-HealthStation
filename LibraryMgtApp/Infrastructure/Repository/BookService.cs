@@ -63,9 +63,25 @@ namespace LibraryMgtApp.Infrastructure.Repository
             return (results, vm);
         }
 
-        public Task<Book> DeleteBook(Guid Id)
+        public async Task<Book> DeleteBook(Guid Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var book = this.FirstOrDefault(p => p.Id == Id);
+                if (book == null)
+                    return null;
+                this.UnitOfWork.BeginTransaction();
+                book.IsDeleted = !book.IsDeleted;
+                book.ModifiedOn = DateTime.Now.GetDateUtcNow();
+                await this.UpdateAsync(book);
+                await this.UnitOfWork.CommitAsync();
+
+                return book;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<Book> GetBookById(Guid id)
@@ -89,15 +105,21 @@ namespace LibraryMgtApp.Infrastructure.Repository
             return book.ToList();
         }
 
-        public async Task<(List<ValidationResult> Result, UpdateBookDto Book)> UpdateBook(UpdateBookDto vm, Guid author_Id)
+        public async Task<(List<ValidationResult> Result, UpdateBookDto Book)> UpdateBook(UpdateBookDto vm, Guid BookId)
         {
             results.Clear();
 
-            var book = this.GetAll(1, 1, a => a.Id, a => a.Id == vm.Id && a.Title == vm.Title, OrderBy.Ascending).FirstOrDefault();
+            var book = this.GetAll(1, 1, a => a.Id, a => a.Id == BookId && a.Title == vm.Title, OrderBy.Ascending).FirstOrDefault();
 
             if (book == null || book.ISBN != vm.ISBN)
             {
                 results.Add(new ValidationResult("Booking couldn't be found to complete update operation."));
+                return (results, null);
+            }
+            var authorId = await _authorServ.GetAuthorById(vm.AuthorId);
+            if (authorId == null)
+            {
+                results.Add(new ValidationResult("Invalid Author ID."));
                 return (results, null);
             }
             book.Cost = vm.Cost;

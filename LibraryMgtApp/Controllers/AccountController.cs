@@ -41,40 +41,52 @@ namespace LibraryMgtApp.Controllers
         [HttpPost(nameof(Register))]
         public async Task<IActionResult> Register([FromBody]RegisterForDto model)
         {
+            ApiResponse<RegisterForDto> response = new ApiResponse<RegisterForDto>();
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                if (string.IsNullOrEmpty(model.Password) || string.IsNullOrEmpty(model.RTPassword))
                 {
-                    if (await _userSrv.UserExists(model.Email))
-                        ModelState.AddModelError("Email", "Email already taken");
-                    if (await _userSrv.PhoneExists(model.PhoneNumber))
-                        ModelState.AddModelError("PhoneNumber", "Phone Number already taken");
-
-                    var user = AppUser.Create(model.FirstName, model.LastName, model.Email, model.Gender, model.PhoneNumber, model.NIN);
-
-                    user.UserName = model.Email;
-                    user.EmailConfirmed = true;
-                    user.FullName = model.FirstName + " " + model.LastName;
-                    user.Activated = true;
-                    user.IsDisabled = false;
-                    user.CreatedOnUtc = DateTime.Now.GetDateUtcNow();
-                    user.LockoutEnabled = false;
-
-                    var createResult = await _userManager.CreateAsync(user, model.Password);
-
-                    if (!createResult.Succeeded)
-                    {
-                        return BadRequest(new { errorList = $"{createResult.Errors.FirstOrDefault().Description}" });
-                    }
-                    createResult = await _userManager.AddToRoleAsync(user, "USERS");
-
-                    if (!createResult.Succeeded)
-                    {
-                        return BadRequest(new { errorList = $"{createResult.Errors.FirstOrDefault().Description}" });
-                    }
+                    return BadRequest(new { error = "Password & Repeat password is required." });
                 }
-                //success message
-                return Ok("Registration Successful");
+                if (model.Password != model.RTPassword)
+                { 
+                    return BadRequest(new { error = "Password & Repeat password does not match." });
+                }
+                if (await _userSrv.UserExists(model.Email))
+                    ModelState.AddModelError("Email", "Email already taken");
+                var IsPhoneAlreadyRegistered = _userManager.Users.Any(item => item.PhoneNumber == model.PhoneNumber);
+                if (IsPhoneAlreadyRegistered == true)
+                {
+                    return BadRequest(new { error = $"{model.PhoneNumber} Already exist!" });
+                }
+
+                var user = AppUser.Create(model.FirstName, model.LastName, model.Email, model.Gender, model.PhoneNumber, model.NIN);
+
+                user.UserName = model.Email;
+                user.EmailConfirmed = true;
+                user.FullName = model.FirstName + " " + model.LastName;
+                user.Activated = true;
+                user.IsDisabled = false;
+                user.CreatedOnUtc = DateTime.Now.GetDateUtcNow();
+                user.LockoutEnabled = false;
+
+                var createResult = await _userManager.CreateAsync(user, model.Password);
+
+                if (!createResult.Succeeded)
+                {
+                    return BadRequest(new { error = $"{createResult.Errors.FirstOrDefault().Description}" });
+                }
+                createResult = await _userManager.AddToRoleAsync(user, "USER");
+
+                if (!createResult.Succeeded)
+                {
+                    return BadRequest(new { error = $"{createResult.Errors.FirstOrDefault().Description}" });
+                }
+                response.Code = ApiResponseCodes.OK;
+                response.Description = $"Registration Successful";
+                return Ok(response);
             }
             catch (Exception ex)
             {
@@ -135,7 +147,7 @@ namespace LibraryMgtApp.Controllers
             response.Description = "Email / Password was not Found";
             return BadRequest(new
             {
-                LoginError = "Invalid Email/Password was entered"
+                error = "Invalid Email/Password was entered"
             });
         }
     }

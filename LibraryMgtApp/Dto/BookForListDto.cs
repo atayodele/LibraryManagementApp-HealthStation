@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace LibraryMgtApp.Dto
 {
-    public class AddBookDto
+    public class BookForListDto
     {
-        [Required]
+        public Guid Id { get; set; }
         public string Title { get; set; }
-        [Required]
         public string ISBN { get; set; }
-        [Required]
         public decimal Cost { get; set; }
-        [Required]
         public DateTime PublichYear { get; set; }
-        [Required]
+        public bool Status { get; set; }
         public Guid AuthorId { get; set; }
     }
 }

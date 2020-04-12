@@ -1,4 +1,5 @@
-﻿using LibraryMgtApp.Context;
+﻿using AutoMapper;
+using LibraryMgtApp.Context;
 using LibraryMgtApp.Extensions.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -27,6 +28,7 @@ namespace LibraryMgtApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddAutoMapper();
             AddCustomIdentity(services);
             AddSwagger(services);
             services.AddMvc().AddJsonOptions(opt =>

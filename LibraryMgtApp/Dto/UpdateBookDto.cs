@@ -7,7 +7,6 @@ namespace LibraryMgtApp.Dto
 {
     public class UpdateBookDto
     {
-        public Guid Id { get; set; }
         public string Title { get; set; }
         public string ISBN { get; set; }
         public decimal Cost { get; set; }

@@ -114,13 +114,13 @@ namespace LibraryMgtApp.Infrastructure.Repository
                     results.Add(new ValidationResult("User couldn't be found to complete update operation."));
                     return (results, null);
                 }
-                user.UserName = vm.Email;
-                user.Email = vm.Email; //ReadOnly
+                user.UserName = user.Email;
+                user.Email = user.Email; //ReadOnly
                 user.FirstName = vm.FirstName;
                 user.LastName = vm.LastName;
                 user.FullName = vm.FirstName + ' ' + vm.LastName;
                 user.Gender = vm.Gender;
-                user.PhoneNumber = vm.PhoneNumber; //ReadOnly
+                user.PhoneNumber = vm.PhoneNumber;
                 user.NIN = vm.NIN;
                 user.IsDisabled = false;
 

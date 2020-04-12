@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ZFRgFMy7ppmwVt/WXvnhEe3tRzt7F/pRhn1svPs3eVaesMg0rfVGJVw1BbKN8vTH6JO8fGLvwwwiZFyS4AKEZw==",
+  "dgSpecHash": "0DzKtqDekCoK/ykD4/GAVXE5YIVXcMvfBt+Gq1bdeFVKAUZcbXL515LuGchThdbWz2J/gL31BMl9Y25IKSrJpw==",
   "success": true,
   "projectFilePath": "C:\\Users\\HP\\source\\repos\\LibraryMgtApp\\LibraryMgtApp\\LibraryMgtApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\HP\\.nuget\\packages\\automapper\\8.0.0\\automapper.8.0.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\6.0.0\\automapper.extensions.microsoft.dependencyinjection.6.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore\\2.1.1\\microsoft.aspnetcore.2.1.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.1.1\\microsoft.aspnetcore.antiforgery.2.1.1.nupkg.sha512",

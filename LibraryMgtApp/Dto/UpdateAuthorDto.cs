@@ -7,7 +7,6 @@ namespace LibraryMgtApp.Dto
 {
     public class UpdateAuthorDto
     {
-        public Guid Id { get; set; } 
         public string Name { get; set; }
     }
 }
