@@ -12,7 +12,6 @@ namespace LibraryMgtApp.Dto
         public string ISBN { get; set; }
         public decimal Cost { get; set; }
         public DateTime PublichYear { get; set; }
-        public bool Status { get; set; }
         public Guid AuthorId { get; set; }
     }
 }

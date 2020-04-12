@@ -4,14 +4,16 @@ using LibraryMgtApp.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LibraryMgtApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200412124157_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,8 +37,8 @@ namespace LibraryMgtApp.Migrations
                     b.ToTable("Roles");
 
                     b.HasData(
-                        new { Id = new Guid("5869ab93-81da-419b-b5ad-41a7bc82cae8"), ConcurrencyStamp = "8d3b63385bd94f7aae9db3f6c2c57b3b", Name = "ADMIN", NormalizedName = "ADMIN" },
-                        new { Id = new Guid("e4410972-f20a-4d07-afdb-c61550e3dd44"), ConcurrencyStamp = "8aa6ca80aed8442fb2d90dcaa123082c", Name = "USER", NormalizedName = "USER" }
+                        new { Id = new Guid("5869ab93-81da-419b-b5ad-41a7bc82cae8"), ConcurrencyStamp = "df786600e8e14aed83db3a71915f0416", Name = "ADMIN", NormalizedName = "ADMIN" },
+                        new { Id = new Guid("e4410972-f20a-4d07-afdb-c61550e3dd44"), ConcurrencyStamp = "76ca0a7f131645448f2ea69f2b6ba48e", Name = "USER", NormalizedName = "USER" }
                     );
                 });
 
@@ -194,8 +196,8 @@ namespace LibraryMgtApp.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { Id = new Guid("129712e3-9214-4dd3-9c03-cfc4eb9ba979"), AccessFailedCount = 0, Activated = true, ConcurrencyStamp = "fbc92671-5317-472d-9b60-9596c8e43fac", CreatedOnUtc = new DateTime(2020, 4, 12, 15, 39, 3, 964, DateTimeKind.Local), Email = "admin@gmail.com", EmailConfirmed = true, FirstName = "Timilehin", FullName = "Timilehin Ayodele", IsDisabled = false, LastName = "Ayodele", LockoutEnabled = false, NIN = "73279-40572", NormalizedEmail = "ADMIN@GMAIL.COM", NormalizedUserName = "ADMIN@GMAIL.COM", PasswordHash = "AQAAAAEAACcQAAAAEF2/Sp4fnfQbRNrJ8+rHqqNrpl0LLWXOSDePUL2yefxV0xjeG5bpKySGFhJsHo03jg==", PhoneNumber = "07032369247", PhoneNumberConfirmed = true, SecurityStamp = "953d3fd1-99e3-4fe7-a20d-3598baa96099", TwoFactorEnabled = false, UserName = "admin@gmail.com" },
-                        new { Id = new Guid("193a9488-ad75-41d6-a3e0-db3f10b6468f"), AccessFailedCount = 0, Activated = true, ConcurrencyStamp = "3ed3752e-3713-4e67-b1b2-de1dee675098", CreatedOnUtc = new DateTime(2020, 4, 12, 15, 39, 3, 982, DateTimeKind.Local), Email = "user@gmail.com", EmailConfirmed = true, FirstName = "Ayeni", FullName = "Ayeni Ayodele", IsDisabled = false, LastName = "Ayodele", LockoutEnabled = false, NIN = "67354-46571", NormalizedEmail = "USER@GMAIL.COM", NormalizedUserName = "USER@GMAIL.COM", PasswordHash = "AQAAAAEAACcQAAAAEH8NnyH0CpYwNu2FB1lCEzUW+1nVYsaUaTQgrT5DNOvNXZdwxCANBrkUDI3WnBzqrQ==", PhoneNumber = "07032367234", PhoneNumberConfirmed = true, SecurityStamp = "9c41c8cc-b489-40c6-bbcf-12edee681919", TwoFactorEnabled = false, UserName = "user@gmail.com" }
+                        new { Id = new Guid("129712e3-9214-4dd3-9c03-cfc4eb9ba979"), AccessFailedCount = 0, Activated = true, ConcurrencyStamp = "afe51527-031f-49dc-bb57-b686d481b043", CreatedOnUtc = new DateTime(2020, 4, 12, 13, 41, 56, 857, DateTimeKind.Local), Email = "admin@gmail.com", EmailConfirmed = true, FirstName = "Timilehin", FullName = "Timilehin Ayodele", IsDisabled = false, LastName = "Ayodele", LockoutEnabled = false, NIN = "73279-40572", NormalizedEmail = "ADMIN@GMAIL.COM", NormalizedUserName = "ADMIN@GMAIL.COM", PasswordHash = "AQAAAAEAACcQAAAAEDNwyESIixL1WYV3ctCng9+UOtPyj0R7E3b/Me+otkDUGeXX6MjOqsQkOgWHDviwGQ==", PhoneNumber = "07032369247", PhoneNumberConfirmed = true, SecurityStamp = "953d3fd1-99e3-4fe7-a20d-3598baa96099", TwoFactorEnabled = false, UserName = "admin@gmail.com" },
+                        new { Id = new Guid("193a9488-ad75-41d6-a3e0-db3f10b6468f"), AccessFailedCount = 0, Activated = true, ConcurrencyStamp = "408736e6-1490-4a3a-ba8b-870f6ad27a9b", CreatedOnUtc = new DateTime(2020, 4, 12, 13, 41, 56, 886, DateTimeKind.Local), Email = "user@gmail.com", EmailConfirmed = true, FirstName = "Ayeni", FullName = "Ayeni Ayodele", IsDisabled = false, LastName = "Ayodele", LockoutEnabled = false, NIN = "67354-46571", NormalizedEmail = "USER@GMAIL.COM", NormalizedUserName = "USER@GMAIL.COM", PasswordHash = "AQAAAAEAACcQAAAAED2FLKQOO7bJslD5vVyoQYwhraevg4EyMelyO7FyaLOyoO6JGWKRdm7tuHMNLFDYew==", PhoneNumber = "07032367234", PhoneNumberConfirmed = true, SecurityStamp = "9c41c8cc-b489-40c6-bbcf-12edee681919", TwoFactorEnabled = false, UserName = "user@gmail.com" }
                     );
                 });
 
@@ -277,7 +279,7 @@ namespace LibraryMgtApp.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("CheckInDate");
+                    b.Property<DateTime>("CheckInDate");
 
                     b.Property<DateTime>("CheckoutDate");
 
@@ -287,7 +289,7 @@ namespace LibraryMgtApp.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<decimal?>("OverDueAmount");
+                    b.Property<decimal>("OverDueAmount");
 
                     b.Property<DateTime>("ReturnDate");
 

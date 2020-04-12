@@ -8,12 +8,17 @@ namespace LibraryMgtApp.Context.Models
 {
     public class Book : BaseEntity, IValidatableObject
     {
-        public static Book Create(String title, String isbn)
+        public Book()
+        {
+            BookCheckouts = new List<BookCheckout>();
+        }
+        public static Book Create(String title, String isbn, int mode)
         {
             return new Book()
             {
                 Title = title,
-                ISBN = isbn
+                ISBN = isbn,
+                StatusMode = (StatusModes)mode,
             };
         }
 
@@ -34,7 +39,7 @@ namespace LibraryMgtApp.Context.Models
         public string ISBN { get; set; }
         public decimal Cost { get; set; }
         public DateTime PublichYear { get; set; }
-        public bool Status { get; set; }
+        public StatusModes StatusMode { get; set; }  
         public Author Author { get; set; }
         public Guid AuthorId { get; set; }
 

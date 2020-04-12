@@ -11,6 +11,7 @@ namespace LibraryMgtApp.Context.Models
         public Guid CheckoutId { get; set; }
         [ForeignKey("CheckoutId")]
         public Checkout Checkout { get; set; } 
+
         public Guid BookId { get; set; }
         [ForeignKey("BookId")]
         public Book Book { get; set; }

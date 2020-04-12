@@ -69,11 +69,11 @@ namespace LibraryMgtApp.Controllers
                     ISBN = book.ISBN,
                     PublichYear = book.PublichYear,
                     Cost = book.Cost,
-                    Status = book.Status,
+                    Status = (int)book.StatusMode == 0 ? "AVAILABLE" : "LEND",
                     AuthorId = book.AuthorId,
                     AuthorName = author.AuthorName
                 };
-                return Ok(book);
+                return Ok(bookViewModel);
             }
             catch (Exception ex)
             {

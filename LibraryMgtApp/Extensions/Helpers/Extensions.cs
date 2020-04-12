@@ -34,5 +34,18 @@ namespace LibraryMgtApp.Extensions.Helpers
                 age--;
             return age;
         }
+        public static DateTime AddBusinessDays(this DateTime dateTime, int businessDays)
+        {
+            DateTime resultDate = dateTime;
+            while (businessDays > 0)
+            {
+                resultDate = resultDate.AddDays(1);
+                if (resultDate.DayOfWeek != DayOfWeek.Saturday &&
+                    resultDate.DayOfWeek != DayOfWeek.Sunday)
+                    businessDays--;
+            }
+            return resultDate;
+        }
+
     }
 }

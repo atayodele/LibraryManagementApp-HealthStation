@@ -33,7 +33,7 @@ namespace LibraryMgtApp.Infrastructure.Repository
                     return (results, null);
                 }
                 //then book ferry
-                var book = Book.Create(vm.Title, vm.ISBN);
+                var book = Book.Create(vm.Title, vm.ISBN, (int)vm.StatusMode);
 
                 bool isValid = Validator.TryValidateObject(book, new ValidationContext(book, null, null),
                     results, false);
@@ -42,14 +42,13 @@ namespace LibraryMgtApp.Infrastructure.Repository
                     return (results, null);
                 if (Exist(vm.Title, vm.ISBN))
                 {
-                    results.Add(new ValidationResult($"{vm.Title} with {vm.ISBN} already exists."));
+                    results.Add(new ValidationResult($"{vm.Title} with ISBN {vm.ISBN} already exists."));
                     return (results, null);
                 }
                 book.Cost = vm.Cost;
                 book.IsDeleted = false;
                 book.PublichYear = vm.PublichYear;
                 book.AuthorId = vm.AuthorId;
-                book.Status = false;
                 book.ModifiedOn = book.CreatedOn = DateTime.Now.GetDateUtcNow();
 
                 this.UnitOfWork.BeginTransaction();
@@ -126,7 +125,7 @@ namespace LibraryMgtApp.Infrastructure.Repository
             book.IsDeleted = false;
             book.PublichYear = vm.PublichYear;
             book.AuthorId = vm.AuthorId;
-            book.Status = false;
+            book.StatusMode = vm.StatusMode;
 
             bool isValid = Validator.TryValidateObject(book, new ValidationContext(book, null, null),
                 results, false);

@@ -20,6 +20,7 @@ namespace LibraryMgtApp
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IUserMgmtService, UserMgmtService>();
+            services.AddScoped<ICheckoutService, CheckoutService>();
             services.AddScoped<ApiExceptionFilter>();
             services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
             services.Configure<AppSettings>(Startup.Configuration);

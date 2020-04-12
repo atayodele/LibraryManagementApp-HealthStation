@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryMgtApp.Context.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,5 +13,6 @@ namespace LibraryMgtApp.Dto
         public decimal Cost { get; set; }
         public DateTime PublichYear { get; set; }
         public Guid AuthorId { get; set; }
+        public StatusModes StatusMode { get; set; }
     }
 }
